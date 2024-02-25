@@ -24,19 +24,28 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('status')
-                    ->required()
-                    ->maxLength(255)
-                    ->default('pending'),
+                Forms\Components\Select::make('user_id')
+                    ->options(
+                        \App\Models\User::all()->pluck('name', 'id')
+                    )->required()->label('User')->searchable(),
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'processing' => 'Processing',
+                        'completed' => 'Completed',
+                        'cancelled' => 'Cancelled',
+                    ])->required(),
                 Forms\Components\TextInput::make('total')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('payment_method')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Select::make('payment_method')
+                    ->options([
+                        'cash' => 'Cash',
+                        'aba' => 'ABA',
+                        'credit_card' => 'Credit Card',
+                        'paypal' => 'PayPal',
+                   
+                    ])
             ]);
     }
 
