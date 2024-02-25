@@ -18,22 +18,21 @@ class ProductResource extends Resource
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Products';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('category_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('category_id')
+                ->options(
+                    \App\Models\Category::all()->pluck('name', 'id')
+                )->required()->label('Category'),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('description')
-                    ->maxLength(255),
+                Forms\Components\Textarea::make('description')
+                    ->maxLength(255)->rows(10),
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->numeric()
