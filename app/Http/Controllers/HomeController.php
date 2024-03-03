@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Promotion;
 use App\Models\Slide;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,7 @@ class HomeController extends Controller
     {
         return view('home',[
             'slides'=> Slide::take(3)->orderBy('order')->get(),
+            'promotions'=> Promotion::take(2)->latest()->get(),
         ]);
     }
 }
