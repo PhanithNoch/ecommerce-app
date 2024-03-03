@@ -34,14 +34,10 @@ class Product extends Model
         return $this->hasMany(OrderDetail::class);
     }
 
-    public function colors()
+   
+    // Optional: If using product_variations table
+    public function variations()
     {
-        return $this->belongsToMany(Color::class);
+        return $this->hasMany(ProductVariation::class);
     }
-
-    public function sizes()
-    {
-        return $this->belongsToMany(Size::class);
-    }
-    
 }

@@ -23,9 +23,11 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('category_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('category_id')
+                ->options(
+                    \App\Models\Category::all()->pluck('name', 'id')
+                )->required()->label('Category'),
+
                 Forms\Components\TextInput::make('user_id')
                     ->required()
                     ->numeric(),
@@ -47,6 +49,18 @@ class ProductResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('discount_price')
                     ->maxLength(255),
+
+
+                    // Optional: If using product_variations table
+
+                    Forms\Components\Select::make('color_id')
+                    ->options(
+                        \App\Models\Color::all()->pluck('name', 'id')
+                    )->required()->label('Color'),
+                Forms\Components\Select::make('size_id')
+                    ->options(
+                        \App\Models\Size::all()->pluck('name', 'id')
+                    )->required()->label('Size'),
             ]);
     }
 
