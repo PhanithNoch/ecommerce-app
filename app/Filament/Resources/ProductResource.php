@@ -6,8 +6,10 @@ use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use Filament\Forms\Get;
+use Filament\Forms\Set;use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -23,44 +25,58 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('category_id')
-                ->options(
-                    \App\Models\Category::all()->pluck('name', 'id')
-                )->required()->label('Category'),
-
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('description')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('price')
-                    ->required()
-                    ->numeric()
-                    ->prefix('$'),
-                Forms\Components\TextInput::make('stock_quantity')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\FileUpload::make('image_url')
-                    ->image(),
-                Forms\Components\TextInput::make('orginal_price')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('discount_price')
-                    ->maxLength(255),
+                Forms\Components\Section::make()->columns([
+                    'sm' => 3,
+                    'xl' => 3,
+                    '2xl' => 3,
+                ])->schema([
+                    Forms\Components\Select::make('category_id')
+                        ->options(
+                            \App\Models\Category::all()->pluck('name', 'id')
+                        )->required()->label('Category'),
+                    Forms\Components\TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('description')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('price')
+                        ->required()
+                        ->numeric()
+                        ->prefix('$'),
+                    Forms\Components\FileUpload::make('image_url')
+                        ->image()
+                    ->disk('public')
+                        ->directory('products')
+                    ->required(),
 
 
                     // Optional: If using product_variations table
 
-                    Forms\Components\Select::make('color_id')
-                    ->options(
-                        \App\Models\Color::all()->pluck('name', 'id')
-                    )->required()->label('Color'),
-                Forms\Components\Select::make('size_id')
-                    ->options(
-                        \App\Models\Size::all()->pluck('name', 'id')
-                    )->required()->label('Size'),
+                ]),
+
+
+
+//                add one section for product variation
+                Repeater::make('product_variations')
+                    ->schema([
+                        Forms\Components\Select::make('color_id')
+                            ->options(
+                                \App\Models\Color::all()->pluck('name', 'id')
+                            )->required()->label('Color'),
+                        Forms\Components\Select::make('size_id')
+                            ->options(
+                                \App\Models\Size::all()->pluck('name', 'id')
+                            )->required()->label('Size'),
+                    ])->columns(2)
+                     ->addActionLabel('Add Variation')
+                ->grid(2)
+                ->columnSpan(2)
+                    ->live()
+                ->afterStateUpdated(function (Set $set,Get $get){
+
+                }),
+
+
             ]);
     }
 
