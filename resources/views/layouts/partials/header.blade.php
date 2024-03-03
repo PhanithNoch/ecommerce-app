@@ -7,7 +7,7 @@
                         <div class="col-lg-3 col-md-4 col-4">
                             <div class="header-logo">
                                 <a href="index-shoe.html" class="logo-main">
-                                    <img src="assets/img/logo.png" loading="lazy" alt="bisum">
+                                    <img src="{{asset('/img/zando.png')}}" loading="lazy" alt="bisum" width="140">
                                 </a>
                             </div>
                         </div>
