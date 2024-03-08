@@ -16,7 +16,10 @@ class Product extends Model
         'category_id',
         'stock_quantity',
         'image_url',
-        'user_id'
+        'user_id',
+        'is_popular',
+        'is_latest_drop',
+        'discount_price',
     ];
 
     public function category()
@@ -34,7 +37,7 @@ class Product extends Model
         return $this->hasMany(OrderDetail::class);
     }
 
-   
+
     // Optional: If using product_variations table
     public function variations()
     {

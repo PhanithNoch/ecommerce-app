@@ -21,6 +21,8 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected  static? string $navigationGroup = 'Products';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -39,18 +41,36 @@ class ProductResource extends Resource
                         ->maxLength(255),
                     Forms\Components\TextInput::make('description')
                         ->maxLength(255),
-                    Forms\Components\TextInput::make('price')
-                        ->required()
-                        ->numeric()
-                        ->prefix('$'),
-                    Forms\Components\FileUpload::make('image_url')
-                        ->image()
-                    ->disk('public')
-                        ->directory('products')
-                    ->required(),
+                  Forms\Components\Grid::make()->columns([
+                      'sm' => 3,
+                      'xl' => 3,
+                      '2xl' => 2,
+                    ])->schema([
+                      Forms\Components\TextInput::make('price')
+                          ->required()
+                          ->numeric()
+                          ->prefix('$'),
+                        Forms\Components\TextInput::make('discount_price')
+                            ->numeric()
+                            ->prefix('$'),
+
+                      Forms\Components\FileUpload::make('image_url')
+                          ->image()
+                          ->disk('public')
+                          ->directory('products')
+                          ->required(),
+                        ],
+                  ),
+                    // add product is_popular
+                    Forms\Components\Checkbox::make('is_popular')
+                        ->label('Is Popular'),
+                    // product is latest drop
+                    Forms\Components\Checkbox::make('is_latest_drop')
+                        ->label('Is Latest Drop'),
 
 
-                    // Optional: If using product_variations table
+//                    show product_variations
+
 
                 ]),
 
@@ -72,9 +92,7 @@ class ProductResource extends Resource
                 ->grid(2)
                 ->columnSpan(2)
                     ->live()
-                ->afterStateUpdated(function (Set $set,Get $get){
-
-                }),
+                ->relationship('variations', )
 
 
             ]);
