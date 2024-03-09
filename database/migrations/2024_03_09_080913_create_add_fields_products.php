@@ -12,11 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-          
-            // $table->string('orginal_price')->nullable();
-            // $table->string('discount_price')->nullable();
-        
-
+            $table->boolean('is_popular')->default(0);
+            $table->boolean('is_latest_drop')->default(0);
         });
     }
 

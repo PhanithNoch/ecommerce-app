@@ -6,6 +6,7 @@ use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -23,14 +24,15 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('category_id')
-                ->options(
-                    \App\Models\Category::all()->pluck('name', 'id')
-                )->required()->label('Category'),
-
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Section::make()->columns([
+                    'sm'=>3,
+                    'xl'=>3,
+                    '2xl'=>3,
+                ])->schema([
+                    Forms\Components\Select::make('category_id')
+                    ->options(
+                        \App\Models\Category::all()->pluck('name', 'id')
+                    )->required()->label('Category'),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -49,18 +51,27 @@ class ProductResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('discount_price')
                     ->maxLength(255),
+                    Forms\Components\Checkbox::make('is_popular'),
+                    Forms\Components\Checkbox::make('is_latest_drop'),
 
 
-                    // Optional: If using product_variations table
-
-                    Forms\Components\Select::make('color_id')
-                    ->options(
-                        \App\Models\Color::all()->pluck('name', 'id')
-                    )->required()->label('Color'),
-                Forms\Components\Select::make('size_id')
-                    ->options(
-                        \App\Models\Size::all()->pluck('name', 'id')
-                    )->required()->label('Size'),
+                // Optional: If using product_variations table
+                Repeater::make('product_variations')
+                    ->schema([
+                        Forms\Components\Select::make('color_id')
+                            ->options(
+                                \App\Models\Color::all()->pluck('name', 'id')
+                            )->required()->label('Color'),
+                        Forms\Components\Select::make('size_id')
+                            ->options(
+                                \App\Models\Size::all()->pluck('name', 'id')
+                            )->required()->label('Size'),
+                    ])->grid(3)
+                    ->addActionLabel('Add Variation')
+                    ->columnSpan(3)
+                    ->relationship('variations')
+                ])
+          
             ]);
     }
 
