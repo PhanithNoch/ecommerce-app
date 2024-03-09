@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',HomeController::class);
+Route::get('view-products',[ProductController::class,'index'])->name('view-products' );
+
 
 Route::middleware([
     'auth:sanctum',
