@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                             <div class="collection-product-container">
-                                <div class="row">
+                                <div class="row product">
                                 @foreach ($products as $pro)
                                     
                                 <div class="col-lg-4 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
@@ -183,11 +183,11 @@
                                             @foreach ($categories as $cate)
                                             <li class="filter-item">
                                                 <label class="filter-label">
-                                                    <input type="checkbox" />
+                                                    <input class="early_access" id="check_{{$cate->id}}" type="checkbox" name="filter_product" value="{{$cate->id}}" />
                                                     <span class="filter-checkbox rounded me-2"></span>
                                                     <span class="filter-text">{{$cate->name}}</span>
                                                 </label>
-                                            </li>  
+                                            </li> 
                                             @endforeach
                                          
                                      

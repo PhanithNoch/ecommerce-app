@@ -105,34 +105,57 @@
     <script src="{{asset('/js/vendor.js')}}"></script>
     <script src="{{asset('/js/main.js')}}"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#viewproduct').click(function() {
-                e.preventDefault(); // Prevent default behavior of the link
+    <script type="text/javascript">
+          $(document).on("change", ".early_access", function () {
+            // get id from the selected option
+            var id = $(this).val();
+            var checkboxs = document.getElementsByClassName('early_access');
+            for (var i = 0; i < checkboxs.length; i++) {
+                //uncheck all other checkboxes
+                if (checkboxs[i].value != id) {
+                    checkboxs[i].checked = false;
+                }
+            }
 
-                var productId = $(this).closest('.product-card').find('input[name="product_id"]').val();
-                console.log('productId', productId);
+            // make the ajax call
+            $.ajax({
+                url: '/filter-products/' + id,
+                type: 'get',
+                data:"_token=<?php echo csrf_token(); ?>",
+                success: function (response) {
+                    //update the products
+                    var products = response.data;
+                    console.log(products);
+                    var html = '';
+                    $.each(products, function (index, value) {
+                        html += '<div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4">';
+                        html += '<div class="product-card">';
+                        html += '<div class="product-card-image">';
+                        html += '<img src="/storage/' + value.image_url + '" alt="' + value.name + '">';
+                        html += '</div>';
+                        html += '<div class="product-card-body">';
+                        html += '<h6 class="product-card-title">' + value.name + '</h6>';
+                        html += '<p class="product-card-price">$' + value.price + '</p>';
+                        html += '<a href="/product/' + value.id + '" class="btn btn-primary">View Product</a>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                    });
+                    $('.product').html(html);
 
-
-
-
+                    
                 
-                // $.ajax({
-                //     url: `/product/${productId}`,
-                //     type: 'GET',
-                //     dataType: 'json',
-                //     data:'_token = <?php echo csrf_token(); ?>',
-                //     success: function(response) {
-
-                //         console.log('response',response);
-                //     },
-                //     error:error => {
-                //         console.log(error);
-                //     }
-                // });
-                // $('#quickview-modal').modal('show');
+                }
             });
+
         });
+
+        // $(document).ready(function() {
+         
+
+
+
+        // });
     </script>
 </body>
 

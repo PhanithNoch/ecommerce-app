@@ -18,7 +18,10 @@ class ProductController extends Controller
     public function getProductDetails($id){
         $product = Product::with('variations')->find($id);
         return response()->json($product);
-   
-    
+
+    }
+    public function filterProducts($cateId){
+        $products = Product::where('category_id',$cateId)->paginate(10);
+        return response()->json($products);
     }
 }
