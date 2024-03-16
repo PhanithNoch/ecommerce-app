@@ -32,9 +32,10 @@
     <link rel="stylesheet" href="{{asset('/css/style.css')}}">
     <!-- all css -->
     <style>
-        .dropdown-navigation-bar{
+        .dropdown-navigation-bar {
             z-index: 9999 !important;
         }
+
         :root {
             --primary-color: #F76B6A;
             --secondary-color: #F76B6A;
@@ -107,22 +108,29 @@
     <script>
         $(document).ready(function() {
             $('#viewproduct').click(function() {
-                const productId = $('#product_id').val();
+                e.preventDefault(); // Prevent default behavior of the link
 
-                $.ajax({
-                    url: `/product/${productId}`,
-                    type: 'GET',
-                    dataType: 'json',
-                    data:'_token = <?php echo csrf_token(); ?>',
-                    success: function(response) {
+                var productId = $(this).closest('.product-card').find('input[name="product_id"]').val();
+                console.log('productId', productId);
+
+
+
+
                 
-                        console.log('response',response);
-                    },
-                    error:error => {
-                        console.log(error);
-                    }
-                });
-                $('#quickview-modal').modal('show');
+                // $.ajax({
+                //     url: `/product/${productId}`,
+                //     type: 'GET',
+                //     dataType: 'json',
+                //     data:'_token = <?php echo csrf_token(); ?>',
+                //     success: function(response) {
+
+                //         console.log('response',response);
+                //     },
+                //     error:error => {
+                //         console.log(error);
+                //     }
+                // });
+                // $('#quickview-modal').modal('show');
             });
         });
     </script>

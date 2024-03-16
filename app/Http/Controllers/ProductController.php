@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function getProductDetails($id){
         $product = Product::with('variations')->find($id);
         return response()->json($product);
-        
+   
     
     }
 }

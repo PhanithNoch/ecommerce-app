@@ -107,9 +107,10 @@
                         </div>
                         <div class="row">
                             @foreach ($products as $pro)
-                            <input type="hidden" id="product_id" value="{{$pro->id}}">
                             <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
                                 <div class="product-card">
+                                <input  name="product_id" type="hidden"  value="{{$pro->id}}">
+
                                     <div class="product-card-img">
                                         <a class="hover-switch" href="collection-left-sidebar.html">
                                             <img class="secondary-img" src="{{ asset('/storage/'.$pro->image_url) }}"
@@ -176,7 +177,7 @@
                          
                         </div>
                         <div class="view-all text-center" data-aos="fade-up" data-aos-duration="700">
-                            <a class="btn-primary" href="#">VIEW ALL</a>
+                            <a class="btn-primary" href="{{route('view-products')}}">VIEW ALL</a>
                         </div>
                     </div>
                 </div>
