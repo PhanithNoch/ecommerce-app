@@ -14,4 +14,11 @@ class ProductController extends Controller
         $products = Product::paginate(10);
         return view('products.index',compact('categories','products'));
     }
+
+    public function getProductDetails($id){
+        $product = Product::with('variations')->find($id);
+        return response()->json($product);
+        
+    
+    }
 }

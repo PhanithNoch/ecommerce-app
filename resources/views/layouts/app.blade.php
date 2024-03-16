@@ -20,6 +20,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -102,6 +103,29 @@
     <!-- all js -->
     <script src="{{asset('/js/vendor.js')}}"></script>
     <script src="{{asset('/js/main.js')}}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#viewproduct').click(function() {
+                const productId = $('#product_id').val();
+
+                $.ajax({
+                    url: `/product/${productId}`,
+                    type: 'GET',
+                    dataType: 'json',
+                    data:'_token = <?php echo csrf_token(); ?>',
+                    success: function(response) {
+                
+                        console.log('response',response);
+                    },
+                    error:error => {
+                        console.log(error);
+                    }
+                });
+                $('#quickview-modal').modal('show');
+            });
+        });
+    </script>
 </body>
 
 </html>

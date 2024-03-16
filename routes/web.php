@@ -17,6 +17,7 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/',HomeController::class);
 Route::get('view-products',[ProductController::class,'index'])->name('view-products' );
+Route::get('product/{id}',[ProductController::class,'getProductDetails']);
 
 
 Route::middleware([

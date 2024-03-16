@@ -107,6 +107,7 @@
                         </div>
                         <div class="row">
                             @foreach ($products as $pro)
+                            <input type="hidden" id="product_id" value="{{$pro->id}}">
                             <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
                                 <div class="product-card">
                                     <div class="product-card-img">
@@ -123,7 +124,7 @@
                                         </div>
 
                                         <div class="product-card-action product-card-action-2 justify-content-center">
-                                            <a href="#quickview-modal" class="action-card action-quickview"
+                                            <button id="viewproduct" class="action-card action-quickview"
                                                 data-bs-toggle="modal">
                                                 <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -131,7 +132,7 @@
                                                         d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z"
                                                         fill="#00234D" />
                                                 </svg>
-                                            </a>
+                                            </button>
 
                                             <a href="#" class="action-card action-wishlist">
                                                 <svg class="icon icon-wishlist" width="26" height="22"
@@ -210,326 +211,10 @@
             </div>
             <!-- banner end -->
 
-            <!-- featured collection start -->
-            <div class="featured-collection-section mt-100 home-section overflow-hidden">
-                <div class="container">
-                    <div class="section-header text-center">
-                        <p class="section-subheading">WHAT'S NEW</p>
-                        <h2 class="section-heading">The Latest Drop</h2>
-                    </div>
 
-                    <div class="product-container position-relative">
-                        <div class="common-slider" data-slick='{
-                        "slidesToShow": 4, 
-                        "slidesToScroll": 1,
-                        "dots": false,
-                        "arrows": true,
-                        "responsive": [
-                          {
-                            "breakpoint": 1281,
-                            "settings": {
-                              "slidesToShow": 3
-                            }
-                          },
-                          {
-                            "breakpoint": 768,
-                            "settings": {
-                              "slidesToShow": 2
-                            }
-                          }
-                        ]
-                    }'>
-                    @foreach ($latest_drops as $ldp)
-                    <div class="new-item" data-aos="fade-up" data-aos-duration="700">
-                                <div class="product-card">
-                                    <div class="product-card-img">
-                                        <a class="hover-switch" href="collection-left-sidebar.html">
-                                            <img class="secondary-img" src="{{ asset('/storage/'.$ldp->image_url) }}"
-                                                alt="product-img">
-                                            <img class="primary-img" src="{{ asset('/storage/'.$ldp->image_url) }}"
-                                                alt="product-img">
-                                        </a>
+         
 
-                                        <div class="product-badge">
-                                            <span class="badge-label badge-new rounded">New</span>
-                                            <span class="badge-label badge-percentage rounded">-44%</span>
-                                        </div>
 
-                                        <div class="product-card-action product-card-action-2 justify-content-center">
-                                            <a href="#quickview-modal" class="action-card action-quickview"
-                                                data-bs-toggle="modal">
-                                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z"
-                                                        fill="#00234D" />
-                                                </svg>
-                                            </a>
-
-                                            <a href="#" class="action-card action-wishlist">
-                                                <svg class="icon icon-wishlist" width="26" height="22"
-                                                    viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z"
-                                                        fill="#00234D" />
-                                                </svg>
-                                            </a>
-
-                                            <a href="#" class="action-card action-addtocart">
-                                                <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26"
-                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z"
-                                                        fill="#00234D" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-card-details">
-                                        <ul class="color-lists list-unstyled d-flex align-items-center">
-                                            <li><a href="javascript:void(0)"
-                                                    class="color-swatch swatch-black active"></a>
-                                            </li>
-                                            <li><a href="javascript:void(0)" class="color-swatch swatch-cyan"></a>
-                                            </li>
-                                            <li><a href="javascript:void(0)" class="color-swatch swatch-purple"></a>
-                                            </li>
-                                        </ul>
-                                        <h3 class="product-card-title">
-                                            <a href="collection-left-sidebar.html">white keds</a>
-                                        </h3>
-                                        <div class="product-card-price">
-                                            <span class="card-price-regular">$1529</span>
-                                            <span class="card-price-compare text-decoration-line-through">$1759</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                          
-                    @endforeach
-                         
-                          
-                        </div>
-                        <div class="activate-arrows show-arrows-always article-arrows arrows-white"></div>
-                    </div>
-                </div>
-            </div>
-            <!-- featured collection end -->
-
-            <!-- single banner start -->
-            <div class="single-banner-section mt-100 overflow-hidden">
-                <div class="position-relative overlay">
-                    <img class="single-banner-img" src="assets/img/banner/single-banner.jpg" alt="slide-1">
-
-                    <div class="content-absolute content-slide">
-                        <div class="container height-inherit d-flex align-items-center">
-                            <div class="content-box single-banner-content py-4">
-                                <h2 class="single-banner-heading heading_42 text-white animate__animated animate__fadeInUp"
-                                    data-animation="animate__animated animate__fadeInUp">
-                                    Climb up to the mountain with NIK
-                                </h2>
-                                <p class="single-banner-text text_16 text-white animate__animated animate__fadeInUp"
-                                    data-animation="animate__animated animate__fadeInUp">
-                                    Free shipping, and no hassle returns. NIK Running shoes for men & women
-                                </p>
-                                <a class="btn-primary single-banner-btn animate__animated animate__fadeInUp"
-                                    href="collection-left-sidebar.html"
-                                    data-animation="animate__animated animate__fadeInUp">
-                                    SHOP NOW
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- single banner end -->
-
-            <!-- instagram start -->
-            <div class="instagram-section mt-100 overflow-hidden home-section">
-                <div class="instagram-inner">
-                    <div class="container">
-                        <div class="section-header text-center">
-                            <div class="section-icon">
-                                <svg width="54" height="54" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M9.99998 2.62165C12.4031 2.62165 12.6877 2.6308 13.6367 2.6741C14.5142 2.71415 14.9908 2.86077 15.3079 2.98398C15.728 3.14725 16.0278 3.34231 16.3428 3.65723C16.6577 3.97215 16.8528 4.272 17.016 4.69206C17.1392 5.00923 17.2859 5.48577 17.3259 6.36323C17.3692 7.31228 17.3783 7.5969 17.3783 10C17.3783 12.4031 17.3692 12.6878 17.3259 13.6368C17.2859 14.5143 17.1392 14.9908 17.016 15.308C16.8528 15.728 16.6577 16.0279 16.3428 16.3428C16.0278 16.6577 15.728 16.8528 15.3079 17.016C14.9908 17.1393 14.5142 17.2859 13.6367 17.3259C12.6879 17.3692 12.4032 17.3784 9.99998 17.3784C7.59672 17.3784 7.3121 17.3692 6.36323 17.3259C5.48574 17.2859 5.00919 17.1393 4.69206 17.016C4.27196 16.8528 3.97212 16.6577 3.6572 16.3428C3.34227 16.0279 3.14721 15.728 2.98398 15.308C2.86073 14.9908 2.71411 14.5143 2.67406 13.6368C2.63076 12.6878 2.62162 12.4031 2.62162 10C2.62162 7.5969 2.63076 7.31228 2.67406 6.36326C2.71411 5.48577 2.86073 5.00923 2.98398 4.69206C3.14721 4.272 3.34227 3.97215 3.6572 3.65723C3.97212 3.34231 4.27196 3.14725 4.69206 2.98398C5.00919 2.86077 5.48574 2.71415 6.36319 2.6741C7.31224 2.6308 7.59687 2.62165 9.99998 2.62165ZM9.99998 1C7.55571 1 7.24926 1.01036 6.28931 1.05416C5.33133 1.09789 4.67712 1.25001 4.10462 1.47251C3.51279 1.70251 3.01088 2.01025 2.51055 2.51058C2.01021 3.01092 1.70247 3.51283 1.47247 4.10466C1.24997 4.67716 1.09785 5.33137 1.05412 6.28935C1.01032 7.24926 1 7.55575 1 10C1 12.4443 1.01032 12.7508 1.05412 13.7107C1.09785 14.6687 1.24997 15.3229 1.47247 15.8954C1.70247 16.4872 2.01021 16.9891 2.51055 17.4895C3.01088 17.9898 3.51279 18.2975 4.10462 18.5275C4.67712 18.75 5.33133 18.9021 6.28931 18.9459C7.24926 18.9897 7.55571 19 9.99998 19C12.4443 19 12.7507 18.9897 13.7107 18.9459C14.6686 18.9021 15.3228 18.75 15.8953 18.5275C16.4872 18.2975 16.9891 17.9898 17.4894 17.4895C17.9898 16.9891 18.2975 16.4872 18.5275 15.8954C18.75 15.3229 18.9021 14.6687 18.9458 13.7107C18.9896 12.7508 19 12.4443 19 10C19 7.55575 18.9896 7.24926 18.9458 6.28935C18.9021 5.33137 18.75 4.67716 18.5275 4.10466C18.2975 3.51283 17.9898 3.01092 17.4894 2.51058C16.9891 2.01025 16.4872 1.70251 15.8953 1.47251C15.3228 1.25001 14.6686 1.09789 13.7107 1.05416C12.7507 1.01036 12.4443 1 9.99998 1ZM9.99998 5.37838C7.44753 5.37838 5.37835 7.44757 5.37835 10C5.37835 12.5525 7.44753 14.6217 9.99998 14.6217C12.5524 14.6217 14.6216 12.5525 14.6216 10C14.6216 7.44757 12.5524 5.37838 9.99998 5.37838ZM9.99998 13C8.34314 13 6.99996 11.6569 6.99996 10C6.99996 8.34317 8.34314 7 9.99998 7C11.6568 7 13 8.34317 13 10C13 11.6569 11.6568 13 9.99998 13ZM15.8842 5.19579C15.8842 5.79226 15.4007 6.27581 14.8042 6.27581C14.2077 6.27581 13.7242 5.79226 13.7242 5.19579C13.7242 4.59931 14.2077 4.1158 14.8042 4.1158C15.4007 4.1158 15.8842 4.59931 15.8842 5.19579Z"
-                                        fill="#00234D" />
-                                </svg>
-                            </div>
-                            <h2 class="section-heading">Shoe products</h2>
-                            <p class="section-subheading">See how our customers styled shoe products in their foot</p>
-                        </div>
-                        <div class="instagram-container position-relative mt-48">
-                            <div class="common-slider" data-slick='{
-                                "slidesToShow": 4, 
-                                "slidesToScroll": 1,
-                                "dots": false,
-                                "arrows": true,
-                                "responsive": [
-                                  {
-                                    "breakpoint": 1281,
-                                    "settings": {
-                                      "slidesToShow": 3
-                                    }
-                                  },
-                                  {
-                                    "breakpoint": 768,
-                                    "settings": {
-                                      "slidesToShow": 2
-                                    }
-                                  }
-                                ]
-                            }'>
-                                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
-                                    <div class="instagram-card">
-                                        <a class="instagram-img-wrapper" href="index-shoe.html">
-                                            <img src="assets/img/instagram/s1.jpg" alt="img"
-                                                class="instagram-card-img rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
-                                    <div class="instagram-card">
-                                        <a class="instagram-img-wrapper" href="index-shoe.html">
-                                            <img src="assets/img/instagram/s2.jpg" alt="img"
-                                                class="instagram-card-img rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
-                                    <div class="instagram-card">
-                                        <a class="instagram-img-wrapper" href="index-shoe.html">
-                                            <img src="assets/img/instagram/s3.jpg" alt="img"
-                                                class="instagram-card-img rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
-                                    <div class="instagram-card">
-                                        <a class="instagram-img-wrapper" href="index-shoe.html">
-                                            <img src="assets/img/instagram/s4.jpg" alt="img"
-                                                class="instagram-card-img rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
-                                    <div class="instagram-card">
-                                        <a class="instagram-img-wrapper" href="index-shoe.html">
-                                            <img src="assets/img/instagram/s2.jpg" alt="img"
-                                                class="instagram-card-img rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
-                                    <div class="instagram-card">
-                                        <a class="instagram-img-wrapper" href="index-shoe.html">
-                                            <img src="assets/img/instagram/s4.jpg" alt="img"
-                                                class="instagram-card-img rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
-                                    <div class="instagram-card">
-                                        <a class="instagram-img-wrapper" href="index-shoe.html">
-                                            <img src="assets/img/instagram/s1.jpg" alt="img"
-                                                class="instagram-card-img rounded">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="activate-arrows show-arrows-always article-arrows arrows-white"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- instagram end -->
-
-            <!-- newsletter start -->
-            <div class="newsletter-section mt-100 overflow-hidden">
-                <div class="newsletter-inner">
-                    <div class="position-relative">
-                        <img class="single-banner-img" src="assets/img/newsletter/2.jpg" alt="slide-1">
-
-                        <div class="content-absolute">
-                            <div class="container height-inherit d-flex align-items-center justify-content-center">
-                                <div class="content-box py-4">
-                                    <div class="newsletter-content newsletter-content-2 text-center">
-                                        <div class="newsletter-header">
-                                            <p class="newsletter-subheading heading_24">News Letter</p>
-                                            <h2 class="newsletter-heading heading_42">Subscribe to our newsletter</h2>
-                                        </div>
-                                        <div class="newsletter-form-wrapper">
-                                            <form action="#" class="newsletter-form d-flex align-items-center rounded">
-                                                <input class="newsletter-input bg-transparent border-0" type="email"
-                                                    placeholder="Enter your e-mail" autocomplete="off">
-                                                <button class="newsletter-btn rounded" type="submit">
-                                                    <svg width="17" height="14" viewBox="0 0 17 14" fill="#fff"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M9.11539 -0.000488604L7.50417 1.99951L11.5769 5.59951L0.500001 5.59951L0.500001 8.19951L11.7049 8.19951L7.50417 11.4995L8.70513 13.9995L16.5 7.19951L9.11539 -0.000488604Z"
-                                                            fill="#FEFEFE" />
-                                                    </svg>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- newsletter end -->
-
-            <!-- brand logo start -->
-            <div class="brand-logo-section mt-100">
-                <div class="brand-logo-inner">
-                    <div class="container">
-                        <div class="brand-logo-container overflow-hidden">
-                            <div class="scroll-horizontal row align-items-center flex-nowrap">
-                                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up"
-                                    data-aos-duration="700">
-                                    <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
-                                        <img src="assets/img/brand/1.png" alt="img">
-                                    </a>
-                                </div>
-                                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up"
-                                    data-aos-duration="700">
-                                    <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
-                                        <img src="assets/img/brand/2.png" alt="img">
-                                    </a>
-                                </div>
-                                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up"
-                                    data-aos-duration="700">
-                                    <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
-                                        <img src="assets/img/brand/3.png" alt="img">
-                                    </a>
-                                </div>
-                                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up"
-                                    data-aos-duration="700">
-                                    <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
-                                        <img src="assets/img/brand/4.png" alt="img">
-                                    </a>
-                                </div>
-                                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up"
-                                    data-aos-duration="700">
-                                    <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
-                                        <img src="assets/img/brand/5.png" alt="img">
-                                    </a>
-                                </div>
-                                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up"
-                                    data-aos-duration="700">
-                                    <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
-                                        <img src="assets/img/brand/6.png" alt="img">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- brand logo end -->
         </main>
 
         <!-- footer start -->
@@ -1478,34 +1163,7 @@
         </div>
         <!-- product quickview end -->
 
-        <!-- newsletter subscribe modal start -->
-        <div class="modal fade" tabindex="-1" id="modal-subscribe">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content newsletter-modal-content">
-                    <div class="modal-header border-0">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body px-4">
-                        <form action="#" class="newletter-modal-form common-form mx-auto">
-                            <div class="section-header mb-3">
-                                <h4 class="newsletter-modal-heading heading_34 d-flex align-items-center justify-content-center">
-                                    <svg class="newsletter-modal-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                                                            
-                                    SUBSCRIBE & SAVE
-                                </h4>
-                                <hr>
-                                <p class="newsletter-modal-misc text_14 mt-4 text-center">Sign up & be the first to hear about exclusive offers, new arrivals & more.</p>
-                            </div>
-                            <div class="newsletter-input-box d-flex align-items-center">
-                                <input class="mt-2 px-3" type="email" placeholder="Email address">
-                                <button type="submit" class="btn-primary d-block mt-2 btn-signin">SUBSCRIBE</button>
-                            </div>
-                            <p class="newsletter-modal-misc text_14 mt-4 text-center pb-4">You can change your email preference any time by clicking "unsubscribe" in your email.</p>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+      
        
     </div>
 @endsection
